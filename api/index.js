@@ -5,27 +5,17 @@ import auth from "./routes/auth.js"
 import hotels from "./routes/hotels.js"
 import rooms from "./routes/rooms.js"
 import tourists from "./routes/tourists.js"
-
+import connect from "./config.js";
+import cookieParser from "cookie-parser"
 
 
 const app =express()
+const PORT =process.env.PORT || 8800;
 dotenv.config()
 
-const connect = async () =>{
-    try {
-        await mongoose.connect(process.env.MONGODB_URL);
-        console.log("connected to mongodb")
-      } catch (error) {
-        throw error 
-      }
-}
-
-mongoose.connection.on("disconnected", ()=>{
-  console.log("mongoDB disconnected")
-});
 
 //middlewares
-
+app.use(cookieParser)
 app.use(express.json())
 
 app.use("/api/auth",auth);
@@ -34,10 +24,7 @@ app.use("/api/rooms",rooms);
 app.use("/api/tourists",tourists);
 
 
-
-
-
-app.listen(8800, ()=>{
+app.listen(PORT, ()=>{
     connect()
-    console.log("connected to backend")
+    console.log(`connected to backend ${PORT}`)
 })
