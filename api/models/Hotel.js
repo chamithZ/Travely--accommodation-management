@@ -33,7 +33,10 @@ const HotelSchema=new mongoose.Schema({
         type:Number,
         reqiured:true
     },
-    photos:{
+    HotelImg:{
+        type:String}
+    ,
+    HotelImgs:{
         type: [String],
     },
     certificates:{
@@ -43,6 +46,10 @@ const HotelSchema=new mongoose.Schema({
         type:String,
         reqiured:true
     },
+    cheapestPrice:{
+        type:Number,
+        reqiured:true 
+    },
     rating:{
         type:Number,
         min:0,
@@ -50,10 +57,6 @@ const HotelSchema=new mongoose.Schema({
     },
     rooms:{
         type: [String],
-    },
-    cheapestPrice:{
-        type:Number,
-        reqiured:true 
     },
     sustainability:{
         type: Boolean,
@@ -67,7 +70,7 @@ const HotelSchema=new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    approveStatus:{
+    isApproved:{
         type: Boolean,
         default: false,
     }

@@ -22,7 +22,7 @@ router.get("/find/:id", getHotel)
 // Get all hotels
 router.get("/",getAllHotel)
 
-router.get("/countByCity",countByCity)
+router.get("/countByCity",countByCity) 
 
 router.get("/countByType",countByType)
 
