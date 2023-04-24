@@ -9,7 +9,7 @@ import tourists from "./routes/tourists.js"
 import connect from "./config.js";
 import cookieParser from "cookie-parser"
 import reservation from "./routes/hotelReservation.js"
-
+import path from "path" 
 
 
 const app =express()
@@ -26,7 +26,7 @@ app.use("/api/users",users);
 app.use("/api/hotels",hotels);
 app.use("/api/rooms",rooms);
 app.use("/api/tourists",tourists);
-app.use("/api/reserveroom",reservation);
+app.use("/api/reserveroom",reservation);//path.join(__dirname, "images")
 
 
 app.listen(PORT, ()=>{

@@ -15,9 +15,9 @@ router.put("/:id",updateHotel)
 //Delete
 
 router.delete("/:id",deleteHotel)
-
+ 
 //get
-router.get("/find/:id", getHotel)
+router.get("/find/:id",getHotel)
 
 // Get all hotels
 router.get("/",getAllHotel)

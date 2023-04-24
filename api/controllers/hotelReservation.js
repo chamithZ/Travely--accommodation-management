@@ -4,7 +4,7 @@ import HotelReservation from "../models/HotelReservation.js";
 export const reservation=async (req, res, next) => {
 
     const {
-        room,
+        room, 
         userId,
         checkinDate,
         checkoutDate,

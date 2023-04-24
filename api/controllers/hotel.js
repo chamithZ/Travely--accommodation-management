@@ -13,10 +13,10 @@ export const storage = multer.diskStorage({
     filename : (req, file, cb) => {
         console.log(file);
         cb(null, Date.now() + path.extname(file.originalname) );
-    }
+    } 
 });
 
-export const upload = multer({
+export const upload = multer({ 
     storage: storage,
     fileFilter: function (req, file, cb) {
       if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -27,7 +27,7 @@ export const upload = multer({
   }).fields([
     { name: 'HotelImg', maxCount: 1 },
     { name: 'HotelImgs', maxCount: 5 },
-    { name: 'certificates', maxCount: 5}
+    { name: 'certificates', maxCount: 2}
   ]);
 
   
@@ -38,32 +38,32 @@ export const upload = multer({
         if (err) {
           console.log(err);
           return res.status(500).json({ message: "Error uploading images" });
-        }
+        }  
   
         // Extract the file names from the request object
         const hotelImg = req.files.HotelImg[0].filename;
-        const certificates = req.files.certificates.map((file) => file.filename);
-        const hotelImgs = req.files.HotelImgs.map((file) => file.filename);
+        const HotelImgs = req.files.HotelImgs.map((file) => file.filename);
+        const certificates=req.files.certificates.map((file)=>file.filename);
   
         // Create a new hotel object from the request body and file names
-        const newHotel = new Hotel({
-          ...req.body,
+        const newHotel = new Hotel({ 
+          ...req.body,   
           HotelImg: hotelImg,
-          certificates: certificates,
-          HotelImgs: hotelImgs,
-        });
+          HotelImgs:HotelImgs,
+          certificates:certificates
+        }); 
   
         // Save the new hotel to the database
         await newHotel.save();
   
-        // Send a response with the new hotel object
-        res.status(200).json(newHotel);
+        // Send a response with the new hotel object 
+        res.status(200).json(newHotel); 
       });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: err.message });
-    }
-  }; 
+    } 
+  };  
   
   
   
@@ -74,7 +74,7 @@ export const updateHotel =async (req,res,next)=>{
     try{
         const updatedHotel= await Hotel.findByIdAndUpdate(req.params.id, {$set:req.body}
             ,{new:true})
-        req.status(200).json(updatedHotel);
+        res.status(200).json(updatedHotel);
 
     }catch(err){
         next(err);
@@ -83,7 +83,7 @@ export const updateHotel =async (req,res,next)=>{
 
 export const deleteHotel =async (req,res,next)=>{
     try{
-        const deleteHotel= await Hotel.findByIdAndDelete(req.params.id);
+        const deleteHotel= await Hotel.findByIdAndDelete(req.params.id); 
         res.status(200).json("Hotel has been deleted.");
 
     }catch(err){
@@ -124,7 +124,7 @@ export const countByCity =async (req,res,next)=>{
 
         res.status(200).json(list);
 
-    }catch(err){
+    }catch(err){    
         res.status(500).json(err);
     }
 }
